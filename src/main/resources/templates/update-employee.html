@@ -304,6 +304,10 @@
                                    id="inputAddress">
                         </div>
                         <div class="form-group">
+                            <label for="inputAddress">Date start working</label>
+                            <input type="date" th:field="*{employee.date_start_work}" name="date_start_work" class="form-control">
+                        </div>
+                        <div class="form-group">
                             <label for="exampleFormControlSelect1">Language</label><br>
                             <div class="form-check" th:each="language : ${languageList}">
                                 <input class="form-check-input" type="checkbox" name="languages"

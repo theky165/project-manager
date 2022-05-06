@@ -95,7 +95,7 @@ public class EmployeeController {
 
     @RequestMapping("/save")
     public String saveEmployee(ModelMap model, Employee employee) {
-        employee.setDate_start_work(Date.valueOf(LocalDate.now()));
+//        employee.setDate_start_work(LocalDate.now());
         employeeService.saveOrUpdateEmployee(employee);
         List<Employee> employeeList = employeeService.listAll();
         model.addAttribute("employeeList", employeeList);

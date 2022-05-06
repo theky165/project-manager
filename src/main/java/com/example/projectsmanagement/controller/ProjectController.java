@@ -62,8 +62,7 @@ public class ProjectController {
 
     @RequestMapping("/save")
     public String saveProject(ModelMap model, Project project) {
-        project.setStart_date(Date.valueOf(LocalDate.now()));
-        project.setEnd_date(Date.valueOf(LocalDate.now()));
+//        project.setStart_date(LocalDate.now());
         projectService.saveOrUpdateProject(project);
         List<Project> projectList = projectService.listAll();
         model.addAttribute("projectList", projectList);

@@ -3,9 +3,11 @@ package com.example.projectsmanagement.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -24,7 +26,8 @@ public class Employee implements Serializable {
     private Role role;
 
     private Boolean status;
-    private Date date_start_work;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate date_start_work;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "employees_languages",
@@ -39,7 +42,7 @@ public class Employee implements Serializable {
     public Employee() {
     }
 
-    public Employee(Integer id, String name, Role role, Boolean status, Date date_start_work, Set<Language> languages, Set<Project> projects) {
+    public Employee(Integer id, String name, Role role, Boolean status, LocalDate date_start_work, Set<Language> languages, Set<Project> projects) {
         this.id = id;
         this.name = name;
         this.role = role;
@@ -81,11 +84,11 @@ public class Employee implements Serializable {
         this.status = status;
     }
 
-    public Date getDate_start_work() {
+    public LocalDate getDate_start_work() {
         return date_start_work;
     }
 
-    public void setDate_start_work(Date date_start_work) {
+    public void setDate_start_work(LocalDate date_start_work) {
         this.date_start_work = date_start_work;
     }
 

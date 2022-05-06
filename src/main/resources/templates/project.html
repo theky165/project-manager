@@ -298,7 +298,7 @@
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4 row">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                        <a href="add" class="btn btn-success">Add Project</a>
+                        <a th:href="@{'/project/add'}" class="btn btn-success">Add Project</a>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav mr-auto">
                             </ul>
@@ -334,14 +334,14 @@
                                            th:value="${item.id}" th:text="${item.getName()}"><br></p></td>
                                     <td><p th:each="item : *{project.employees}"
                                            th:value="${item.id}" th:text="${item.getName()}"><br></p></td>
-                                    <td th:text="${#dates.format(project.start_date, 'dd-MM-yyyy')}"></td>
-                                    <td th:text="${#dates.format(project.end_date, 'dd-MM-yyyy')}"></td>
+                                    <td th:text="${project.start_date}"></td>
+                                    <td th:text="${project.end_date}"></td>
                                     <td>
                                         <span style="color: green" th:if="${project.status}">Active</span>
                                         <span style="color: darkred" th:unless="${project.status}">Deactive</span>
                                     </td>
 
-                                    <td><a th:href="@{'update/' + ${project.id}}">
+                                    <td><a th:href="@{'/project/update/' + ${project.id}}">
                                         <button type="button" class="btn btn-primary">Update</button>
                                     </a></td>
 <!--                                    <td><a th:href="@{'delete/' + ${project.id}}"-->

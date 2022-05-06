@@ -304,6 +304,16 @@
                                    id="inputAddress">
                         </div>
                         <div class="form-group">
+                            <label for="inputAddress">Start Date</label>
+                            <input type="date" th:field="${project.start_date}"
+                                   class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputAddress">End Date</label>
+                            <input type="date" th:field="${project.end_date}"
+                                   class="form-control">
+                        </div>
+                        <div class="form-group">
                             <label>Language</label><br>
                             <div class="form-check" th:each="language : ${languageList}">
                                 <input class="form-check-input" type="checkbox" name="languages"
@@ -320,12 +330,6 @@
                                 <label class="form-check-label" th:text="${employee.name}">
                                 </label>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputAddress">Start Date</label>
-                            <input type="text" readonly
-                                   th:value="${#dates.format(project.start_date, 'dd-MM-yyyy')}"
-                                   class="form-control">
                         </div>
                         <div class="form-group">
                             <label>Status</label>

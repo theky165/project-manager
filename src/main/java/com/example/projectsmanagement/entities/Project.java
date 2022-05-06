@@ -2,9 +2,11 @@ package com.example.projectsmanagement.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -16,10 +18,10 @@ public class Project implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date start_date;
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date end_date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate start_date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate end_date;
     private Boolean status;
     private Integer is_delete;
 
@@ -40,7 +42,7 @@ public class Project implements Serializable {
     public Project() {
     }
 
-    public Project(Integer id, String name, Date start_date, Date end_date, Boolean status, Integer is_delete, Set<Employee> employees, Set<Language> languages) {
+    public Project(Integer id, String name, LocalDate start_date, LocalDate end_date, Boolean status, Integer is_delete, Set<Employee> employees, Set<Language> languages) {
         this.id = id;
         this.name = name;
         this.start_date = start_date;
@@ -67,19 +69,19 @@ public class Project implements Serializable {
         this.name = name;
     }
 
-    public Date getStart_date() {
+    public LocalDate getStart_date() {
         return start_date;
     }
 
-    public void setStart_date(Date start_date) {
+    public void setStart_date(LocalDate start_date) {
         this.start_date = start_date;
     }
 
-    public Date getEnd_date() {
+    public LocalDate getEnd_date() {
         return end_date;
     }
 
-    public void setEnd_date(Date end_date) {
+    public void setEnd_date(LocalDate end_date) {
         this.end_date = end_date;
     }
 

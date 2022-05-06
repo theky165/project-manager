@@ -331,14 +331,14 @@
                                     <td th:text="${employee.name}"></td>
                                     <td><p th:each="item : *{employee.languages}"
                                            th:value="${item.id}" th:text="${item.name}"><br></p></td>
-                                    <td th:text="${#dates.format(employee.date_start_work, 'dd-MM-yyyy')}"></td>
+                                    <td th:text="${employee.date_start_work}"></td>
                                     <td th:each="item : ${roleList}" th:if="${item.id == employee.role.getId()}"
                                         th:value="${item.id}" th:text="${item.name}"></td>
                                     <td>
                                         <span style="color: green" th:if="${employee.status}">Active</span>
                                         <span style="color: darkred" th:unless="${employee.status}">Deactive</span>
                                     </td>
-                                    <td><a th:href="@{'update/' + ${employee.id}}">
+                                    <td><a th:href="@{'/employee/update/' + ${employee.id}}">
                                         <button type="button" class="btn btn-primary">Update</button>
                                     </a></td>
 <!--                                    <td><a th:href="@{'delete/' + ${employee.id}}"-->
