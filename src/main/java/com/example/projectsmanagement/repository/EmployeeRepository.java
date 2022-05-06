@@ -15,6 +15,4 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     //Custom query
     @Query(value = "select e from employee e where e.name like %:keyword%")
     Page<Employee> findAllByName(@Param("keyword") String keyword, Pageable pageable);
-
-//    List<Employee> searchByKeyword(@Param("keyword") String keyword);
 }

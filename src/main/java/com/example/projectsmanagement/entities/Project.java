@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 //POJO
@@ -16,27 +17,35 @@ public class Project implements Serializable {
     private String name;
     private Date start_date;
     private Date end_date;
-    private Integer status_id;
+    private Boolean status;
     private Integer is_delete;
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private Set<ProjectsLanguages> projectsLanguages;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "projects_employees",
+            joinColumns = @JoinColumn(name = "project_id"),
+            inverseJoinColumns = @JoinColumn(name = "employee_id")
+    )
+    private Set<Language> employees = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private Set<ProjectsEmployees> projectsEmployees;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "projects_languages",
+            joinColumns = @JoinColumn(name = "project_id"),
+            inverseJoinColumns = @JoinColumn(name = "language_id")
+    )
+    private Set<Language> languages = new LinkedHashSet<>();
 
     public Project() {
     }
 
-    public Project(Integer id, String name, Date start_date, Date end_date, Integer status_id, Integer is_delete) {
+    public Project(Integer id, String name, Date start_date, Date end_date, Boolean status, Integer is_delete, Set<Language> employees, Set<Language> languages) {
         this.id = id;
         this.name = name;
         this.start_date = start_date;
         this.end_date = end_date;
-        this.status_id = status_id;
+        this.status = status;
         this.is_delete = is_delete;
+        this.employees = employees;
+        this.languages = languages;
     }
 
     public Integer getId() {
@@ -71,12 +80,12 @@ public class Project implements Serializable {
         this.end_date = end_date;
     }
 
-    public Integer getStatus_id() {
-        return status_id;
+    public Boolean getStatus() {
+        return status;
     }
 
-    public void setStatus_id(Integer status_id) {
-        this.status_id = status_id;
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     public Integer getIs_delete() {
@@ -85,5 +94,21 @@ public class Project implements Serializable {
 
     public void setIs_delete(Integer is_delete) {
         this.is_delete = is_delete;
+    }
+
+    public Set<Language> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Set<Language> employees) {
+        this.employees = employees;
+    }
+
+    public Set<Language> getLanguages() {
+        return languages;
+    }
+
+    public void setLanguages(Set<Language> languages) {
+        this.languages = languages;
     }
 }

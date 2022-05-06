@@ -33,16 +33,20 @@ public class Employee implements Serializable {
     )
     private Set<Language> languages = new LinkedHashSet<>();
 
+    @ManyToMany(mappedBy = "employees")
+    private Set<Project> projects = new LinkedHashSet<>();
+
     public Employee() {
     }
 
-    public Employee(Integer id, String name, Role role, Boolean status, Date date_start_work, Set<Language> languages) {
+    public Employee(Integer id, String name, Role role, Boolean status, Date date_start_work, Set<Language> languages, Set<Project> projects) {
         this.id = id;
         this.name = name;
         this.role = role;
         this.status = status;
         this.date_start_work = date_start_work;
         this.languages = languages;
+        this.projects = projects;
     }
 
     public Integer getId() {
@@ -91,5 +95,13 @@ public class Employee implements Serializable {
 
     public void setLanguages(Set<Language> languages) {
         this.languages = languages;
+    }
+
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
     }
 }

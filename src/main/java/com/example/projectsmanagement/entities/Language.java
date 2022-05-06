@@ -18,12 +18,17 @@ public class Language implements Serializable {
     @ManyToMany(mappedBy = "languages")
     private Set<Employee> employees = new LinkedHashSet<>();
 
+    @ManyToMany(mappedBy = "languages")
+    private Set<Project> projects = new LinkedHashSet<>();
+
     public Language() {
     }
 
-    public Language(Integer id, String name) {
+    public Language(Integer id, String name, Set<Employee> employees, Set<Project> projects) {
         this.id = id;
         this.name = name;
+        this.employees = employees;
+        this.projects = projects;
     }
 
     public Integer getId() {
@@ -48,5 +53,13 @@ public class Language implements Serializable {
 
     public void setEmployees(Set<Employee> employees) {
         this.employees = employees;
+    }
+
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
     }
 }
