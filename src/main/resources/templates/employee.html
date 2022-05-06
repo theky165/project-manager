@@ -338,19 +338,19 @@
                                         <span style="color: green" th:if="${employee.status}">Active</span>
                                         <span style="color: darkred" th:unless="${employee.status}">Deactive</span>
                                     </td>
-
                                     <td><a th:href="@{'update/' + ${employee.id}}">
                                         <button type="button" class="btn btn-primary">Update</button>
                                     </a></td>
-                                    <!--                                    <td><a th:href="@{'delete/' + ${employee.id}}"-->
-                                    <!--                                           onclick="return confirm('Are you sure you want to delete this item?');">-->
-                                    <!--                                        <button type="button" class="btn btn-danger">Delete</button>-->
-                                    <!--                                    </a></td>-->
+<!--                                    <td><a th:href="@{'delete/' + ${employee.id}}"-->
+<!--                                           onclick="return confirm('Are you sure you want to delete this item?');">-->
+<!--                                        <button type="button" class="btn btn-danger">Delete</button>-->
+<!--                                    </a></td>-->
                                 </tr>
                                 </tbody>
                             </table>
                             <div class="text-center" th:if="${employeeList.totalPages > 1}">
                                 <ul class="pagination">
+                                    Page:
                                     <li th:each="i: ${#numbers.sequence(1,employeeList.totalPages)}">
                                         <a th:href="@{'/employee/page/' + ${i} + ${keyword != null ? '?keyword=' +keyword : ''}}">[[${i}]]</a>
                                     </li>

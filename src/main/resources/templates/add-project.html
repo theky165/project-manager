@@ -302,28 +302,26 @@
                             <label for="inputAddress">Name</label>
                             <input type="text" name="name" class="form-control" id="inputAddress">
                         </div>
-                        <!--                        <div class="form-group">-->
-                        <!--                            <label for="inputAddress">Start working date</label>-->
-                        <!--                            <input type="date" name="start_date" class="form-control">-->
-                        <!--                        </div>-->
                         <div class="form-group">
-                            <label for="exampleFormControlSelect1">Language</label><br>
+                            <label>Language</label><br>
                             <div class="form-check" th:each="language : ${languageList}">
                                 <input class="form-check-input" name="languages" type="checkbox"
-                                       th:value="${language.id}" id="flexCheckDefault">
+                                       th:value="${language.id}" onchange='handleChange(this);'>
                                 <label class="form-check-label" for="flexCheckDefault" th:text="${language.name}">
                                 </label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlSelect1">Role</label>
-                            <select class="form-control" id="exampleFormControlSelect1" name="role">
-                                <option th:each="role : ${roleList}" th:value="${role.id}"
-                                        th:text="${role.name}"></option>
-                            </select>
+                            <label>Employee</label><br>
+                            <div class="form-check" th:each="employee : ${employeeList}">
+                                <input class="form-check-input" name="employees" type="checkbox"
+                                       th:value="${employee.id}" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault" th:text="${employee.name}">
+                                </label>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlSelect1">Status</label>
+                            <label>Status</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="status"
                                        id="flexRadioDefault1" th:value="false">
@@ -407,7 +405,16 @@
 
 <!-- Page level custom scripts -->
 <script src="../js/demo/datatables-demo.js"></script>
-
+<script>
+    // function handleChange(checkbox) {
+    //     if(checkbox.checked == true){
+    //         // document.getElementById("submit").removeAttribute("disabled");
+    //         alert("Checked!");
+    //     }else{
+    //         // document.getElementById("submit").setAttribute("disabled", "disabled");
+    //     }
+    // }
+</script>
 </body>
 
 </html>

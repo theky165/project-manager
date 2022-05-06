@@ -12,10 +12,10 @@
     <title>Employee</title>
 
     <!-- Custom fonts for this template -->
-    <link ref="stylesheet" th:href="@{../vendor/fontawesome-free/css/all.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{../vendor/fontawesome-free/css/all.min.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{../css/sb-admin-2.min.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{../vendor/datatables/dataTables.bootstrap4.min.css}">
+    <link ref="stylesheet" th:href="@{../../vendor/fontawesome-free/css/all.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{../../vendor/fontawesome-free/css/all.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{../../css/sb-admin-2.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{../../vendor/datatables/dataTables.bootstrap4.min.css}">
     <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
@@ -196,7 +196,7 @@
                             </h6>
                             <a class="dropdown-item d-flex align-items-center" href="#">
                                 <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="../img/undraw_profile_1.svg"
+                                    <img class="rounded-circle" src="../../img/undraw_profile_1.svg"
                                          alt="...">
                                     <div class="status-indicator bg-success"></div>
                                 </div>
@@ -209,7 +209,7 @@
                             </a>
                             <a class="dropdown-item d-flex align-items-center" href="#">
                                 <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="../img/undraw_profile_2.svg"
+                                    <img class="rounded-circle" src="../../img/undraw_profile_2.svg"
                                          alt="...">
                                     <div class="status-indicator"></div>
                                 </div>
@@ -222,7 +222,7 @@
                             </a>
                             <a class="dropdown-item d-flex align-items-center" href="#">
                                 <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="../img/undraw_profile_3.svg"
+                                    <img class="rounded-circle" src="../../img/undraw_profile_3.svg"
                                          alt="...">
                                     <div class="status-indicator bg-warning"></div>
                                 </div>
@@ -259,7 +259,7 @@
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">Century
                             </span>
                             <img class="img-profile rounded-circle"
-                                 src="../img/undraw_profile.svg">
+                                 src="../../img/undraw_profile.svg">
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -293,54 +293,60 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Add Employee</h1>
-
+                <h1 class="h3 mb-2 text-gray-800">Update Project</h1>
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4 card-body">
-                    <form action="save" method="post">
+                    <form action="../save" method="post">
+                        <input type="hidden" th:field="*{project.id}">
                         <div class="form-group">
                             <label for="inputAddress">Name</label>
-                            <input type="text" name="name" class="form-control" id="inputAddress">
+                            <input type="text" th:field="*{project.name}" name="name" class="form-control"
+                                   id="inputAddress">
                         </div>
-                        <!--                        <div class="form-group">-->
-                        <!--                            <label for="inputAddress">Start working date</label>-->
-                        <!--                            <input type="date" name="start_date" class="form-control">-->
-                        <!--                        </div>-->
                         <div class="form-group">
-                            <label for="exampleFormControlSelect1">Language</label><br>
+                            <label>Language</label><br>
                             <div class="form-check" th:each="language : ${languageList}">
-                                <input class="form-check-input" name="languages" type="checkbox"
-                                       th:value="${language.id}" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault" th:text="${language.name}">
+                                <input class="form-check-input" type="checkbox" name="languages"
+                                       th:field="*{project.languages}" th:value="${language.id}">
+                                <label class="form-check-label" th:text="${language.name}">
                                 </label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlSelect1">Role</label>
-                            <select class="form-control" id="exampleFormControlSelect1" name="role">
-                                <option th:each="role : ${roleList}" th:value="${role.id}"
-                                        th:text="${role.name}"></option>
-                            </select>
+                            <label>Employee</label><br>
+                            <div class="form-check" th:each="employee : ${employeeList}">
+                                <input class="form-check-input" type="checkbox" name="languages"
+                                       th:field="*{project.employees}" th:value="${employee.id}">
+                                <label class="form-check-label" th:text="${employee.name}">
+                                </label>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlSelect1">Status</label>
+                            <label for="inputAddress">Start Date</label>
+                            <input type="text" readonly
+                                   th:value="${#dates.format(project.start_date, 'dd-MM-yyyy')}"
+                                   class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="status"
-                                       id="flexRadioDefault1" th:value="false">
+                                       id="flexRadioDefault1" th:field="*{project.status}" th:value="false">
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     Deactive
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="status"
-                                       id="flexRadioDefault2" checked th:value="true">
+                                       id="flexRadioDefault2" th:field="*{project.status}" checked="checked"
+                                       th:value="true">
                                 <label class="form-check-label" for="flexRadioDefault2">
                                     Active
                                 </label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Add</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
                             <a href="all" class="btn btn-danger">Cancel</a>
                         </div>
                     </form>
@@ -392,21 +398,21 @@
     </div>
 </div>
 <!-- Bootstrap core JavaScript-->
-<script src="../vendor/jquery/jquery.min.js"></script>
-<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../../vendor/jquery/jquery.min.js"></script>
+<script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Core plugin JavaScript-->
-<script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="../js/sb-admin-2.min.js"></script>
+<script src="../../js/sb-admin-2.min.js"></script>
 
 <!-- Page level plugins -->
-<script src="../vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="../js/demo/datatables-demo.js"></script>
+<script src="../../js/demo/datatables-demo.js"></script>
 
 </body>
 

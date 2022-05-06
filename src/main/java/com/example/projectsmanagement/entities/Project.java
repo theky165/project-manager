@@ -1,5 +1,6 @@
 package com.example.projectsmanagement.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -15,7 +16,9 @@ public class Project implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date start_date;
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date end_date;
     private Boolean status;
     private Integer is_delete;
@@ -25,7 +28,7 @@ public class Project implements Serializable {
             joinColumns = @JoinColumn(name = "project_id"),
             inverseJoinColumns = @JoinColumn(name = "employee_id")
     )
-    private Set<Language> employees = new LinkedHashSet<>();
+    private Set<Employee> employees = new LinkedHashSet<>();
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "projects_languages",
@@ -37,7 +40,7 @@ public class Project implements Serializable {
     public Project() {
     }
 
-    public Project(Integer id, String name, Date start_date, Date end_date, Boolean status, Integer is_delete, Set<Language> employees, Set<Language> languages) {
+    public Project(Integer id, String name, Date start_date, Date end_date, Boolean status, Integer is_delete, Set<Employee> employees, Set<Language> languages) {
         this.id = id;
         this.name = name;
         this.start_date = start_date;
@@ -96,11 +99,11 @@ public class Project implements Serializable {
         this.is_delete = is_delete;
     }
 
-    public Set<Language> getEmployees() {
+    public Set<Employee> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(Set<Language> employees) {
+    public void setEmployees(Set<Employee> employees) {
         this.employees = employees;
     }
 

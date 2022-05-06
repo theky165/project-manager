@@ -293,7 +293,7 @@
             <div class="container-fluid">
 
                 <!--                 Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Employee List</h1>
+                <h1 class="h3 mb-2 text-gray-800">Project List</h1>
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4 row">
@@ -319,6 +319,7 @@
                                     <th>Languages</th>
                                     <th>Employees</th>
                                     <th>Date start</th>
+                                    <th>Date end</th>
                                     <th>Status</th>
                                     <!--                                    <th>Start working date</th>-->
                                     <th></th>
@@ -334,6 +335,7 @@
                                     <td><p th:each="item : *{project.employees}"
                                            th:value="${item.id}" th:text="${item.getName()}"><br></p></td>
                                     <td th:text="${#dates.format(project.start_date, 'dd-MM-yyyy')}"></td>
+                                    <td th:text="${#dates.format(project.end_date, 'dd-MM-yyyy')}"></td>
                                     <td>
                                         <span style="color: green" th:if="${project.status}">Active</span>
                                         <span style="color: darkred" th:unless="${project.status}">Deactive</span>
@@ -342,15 +344,16 @@
                                     <td><a th:href="@{'update/' + ${project.id}}">
                                         <button type="button" class="btn btn-primary">Update</button>
                                     </a></td>
-                                    <!--                                    <td><a th:href="@{'delete/' + ${employee.id}}"-->
-                                    <!--                                           onclick="return confirm('Are you sure you want to delete this item?');">-->
-                                    <!--                                        <button type="button" class="btn btn-danger">Delete</button>-->
-                                    <!--                                    </a></td>-->
+<!--                                    <td><a th:href="@{'delete/' + ${project.id}}"-->
+<!--                                           onclick="return confirm('Are you sure you want to delete this item?');">-->
+<!--                                        <button type="button" class="btn btn-danger">Delete</button>-->
+<!--                                    </a></td>-->
                                 </tr>
                                 </tbody>
                             </table>
                             <div class="text-center" th:if="${projectList.totalPages > 1}">
                                 <ul class="pagination">
+                                    Page:
                                     <li th:each="i: ${#numbers.sequence(1,projectList.totalPages)}">
                                         <a th:href="@{'/project/page/' + ${i} + ${keyword != null ? '?keyword=' +keyword : ''}}">[[${i}]]</a>
                                     </li>

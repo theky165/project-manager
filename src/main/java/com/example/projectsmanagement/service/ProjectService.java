@@ -11,7 +11,7 @@ public interface ProjectService {
 
     void saveOrUpdateProject(Project project);
 
-    void deleteProject(Project project);
+    void deleteProject(Integer id);
 
     Project findById(Integer id);
     Page<Project> findPaginated(int pageNo, int pageSize);

@@ -42,12 +42,12 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" th:href="@{/project/all}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Project</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" th:href="@{/employee/all}">
                 <i class="fas fa-fw fa-cog"></i>
                 <span>Employee</span>
             </a>
@@ -61,10 +61,10 @@
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="login.html">Language</a>
-                    <a class="collapse-item" href="register.html">Role</a>
-                    <a class="collapse-item" href="forgot-password.html">Setting</a>
-                    <a class="collapse-item" href="blank.html">Status
+                    <a class="collapse-item" th:href="@{/language/all}">Language</a>
+                    <a class="collapse-item" th:href="@{/role/all}">Role</a>
+                    <a class="collapse-item" th:href="@{/setting/all}">Setting</a>
+                    <a class="collapse-item" th:href="@{/status/all}">Status
                     </a>
                 </div>
             </div>

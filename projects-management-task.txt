@@ -1,0 +1,12 @@
+Bài tập về nhà:
+- Xây dựng trang web quản lý dự án
+	+ Hiển thị thông tin dự án (tên dự án, ngôn ngữ sử dụng, trạng thái, thông tin thành viên, ngày start ngày end)
+	search theo name, theo trạng thái, theo start date - end date
+	+ Hiển thị thông tin các nhân viên trong công ty (Tên nhân viên, ngôn ngữ sử dụng, chức vụ, ngày tham gia công ty)
+	+ Yêu cầu một nhân viên chỉ được làm tối đa 3 dự án
+	+ Yêu cầu nhân viên phải có ngôn ngữ giống với ngôn ngữ dự án sử dụng thì mới được join
+	+ Hiển thị lịch sử nhân viên đã từng làm dự án nào, thời gian bắt đầu và kết thúc
+
+Note:
+1. Dùng Model Attribute để hứng Filter
+2. Sửa UI phân trang

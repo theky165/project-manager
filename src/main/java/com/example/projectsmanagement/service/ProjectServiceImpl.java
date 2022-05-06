@@ -29,17 +29,17 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void deleteProject(Project project) {
-        projectRepository.deleteById(project.getId());
+    public void deleteProject(Integer id) {
+        projectRepository.deleteById(id);
     }
 
     @Override
     public Project findById(Integer id) {
-            Optional<Project> projectOptional = projectRepository.findById(id);
-            if (!projectOptional.isPresent()) {
-                return new Project();
-            }
-            return projectOptional.get();
+        Optional<Project> projectOptional = projectRepository.findById(id);
+        if (!projectOptional.isPresent()) {
+            return new Project();
+        }
+        return projectOptional.get();
     }
 
     @Override
