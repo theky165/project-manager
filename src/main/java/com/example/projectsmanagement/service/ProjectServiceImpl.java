@@ -24,6 +24,11 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public List<Project> findAllProjectByEmployeeId(Integer id) {
+        return projectRepository.findAllProjectByEmployeeId(id);
+    }
+
+    @Override
     public void saveOrUpdateProject(Project project) {
         projectRepository.save(project);
     }

@@ -9,6 +9,8 @@ import java.util.List;
 public interface ProjectService {
     List<Project> listAll();
 
+    List<Project> findAllProjectByEmployeeId(Integer id);
+
     void saveOrUpdateProject(Project project);
 
     void deleteProject(Integer id);

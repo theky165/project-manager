@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Employee</title>
+    <title>Project</title>
 
     <!-- Custom fonts for this template -->
     <link ref="stylesheet" th:href="@{../../vendor/fontawesome-free/css/all.css}">
@@ -19,6 +19,10 @@
     <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -283,24 +287,44 @@
                             </a>
                         </div>
                     </li>
-
                 </ul>
 
             </nav>
             <!-- End of Topbar -->
 
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
-
-                <!--                 Page Heading -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <h1 class="h3 mb-2 text-gray-800">Project List</h1>
-
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav mr-auto">
+                    </ul>
+                    <a th:href="@{'/project/add'}" class="btn btn-success">Add Project</a>
+                </div>
+            </nav>
+            <div class="container-fluid">
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4 row">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                        <a th:href="@{'/project/add'}" class="btn btn-success">Add Project</a>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav mr-auto">
+                                <div class="form-inline">
+                                    <div class="form-group col-lg-12">
+                                        <div class="form-group">
+                                            <label>Start date</label><br>
+                                            <input type="date" name="start_date"
+                                                   class="form-control" id="inputAddress">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>End date</label><br>
+                                            <input type="date" name="end_date"
+                                                   class="form-control">
+                                        </div>
+                                        <select class="form-control">
+                                            <option value="-1">Status</option>
+                                            <option value="1">Active</option>
+                                            <option value="0">Deactive</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </ul>
                             <form class="form-inline my-2 my-lg-0" action="/project/page/1">
                                 <input class="form-control mr-sm-2" type="text" name="keyword" placeholder="Search"
@@ -342,23 +366,23 @@
                                     </td>
 
                                     <td><a th:href="@{'/project/update/' + ${project.id}}">
-                                        <button type="button" class="btn btn-primary">Update</button>
+                                        <button type="button" class="btn btn-primary">View/Update</button>
                                     </a></td>
-<!--                                    <td><a th:href="@{'delete/' + ${project.id}}"-->
-<!--                                           onclick="return confirm('Are you sure you want to delete this item?');">-->
-<!--                                        <button type="button" class="btn btn-danger">Delete</button>-->
-<!--                                    </a></td>-->
+                                    <!--                                    <td><a th:href="@{'delete/' + ${project.id}}"-->
+                                    <!--                                           onclick="return confirm('Are you sure you want to delete this item?');">-->
+                                    <!--                                        <button type="button" class="btn btn-danger">Delete</button>-->
+                                    <!--                                    </a></td>-->
                                 </tr>
                                 </tbody>
                             </table>
-                            <div class="text-center" th:if="${projectList.totalPages > 1}">
-                                <ul class="pagination">
-                                    Page:
-                                    <li th:each="i: ${#numbers.sequence(1,projectList.totalPages)}">
-                                        <a th:href="@{'/project/page/' + ${i} + ${keyword != null ? '?keyword=' +keyword : ''}}">[[${i}]]</a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <ul class="pagination justify-content-center" th:if="${projectList.totalPages > 1}">
+<!--                                <li class="page-item"><a class="page-link" href="javascript:void(0);">Previous</a></li>-->
+                                <li class="page-item" th:each="i: ${#numbers.sequence(1,projectList.totalPages)}">
+                                    <a class="page-link" href="javascript:void(0);"
+                                       th:href="@{'/project/page/' + ${i} + ${keyword != null ? '?keyword=' +keyword : ''}}">[[${i}]]</a>
+                                </li>
+<!--                                <li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>-->
+                            </ul>
                         </div>
                     </div>
                 </div>

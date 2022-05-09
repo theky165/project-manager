@@ -29,6 +29,9 @@ public class Employee implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date_start_work;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate update_at;
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "employees_languages",
             joinColumns = @JoinColumn(name = "employee_id"),
@@ -42,12 +45,13 @@ public class Employee implements Serializable {
     public Employee() {
     }
 
-    public Employee(Integer id, String name, Role role, Boolean status, LocalDate date_start_work, Set<Language> languages, Set<Project> projects) {
+    public Employee(Integer id, String name, Role role, Boolean status, LocalDate date_start_work, LocalDate update_at, Set<Language> languages, Set<Project> projects) {
         this.id = id;
         this.name = name;
         this.role = role;
         this.status = status;
         this.date_start_work = date_start_work;
+        this.update_at = update_at;
         this.languages = languages;
         this.projects = projects;
     }
@@ -90,6 +94,14 @@ public class Employee implements Serializable {
 
     public void setDate_start_work(LocalDate date_start_work) {
         this.date_start_work = date_start_work;
+    }
+
+    public LocalDate getUpdate_at() {
+        return update_at;
+    }
+
+    public void setUpdate_at(LocalDate update_at) {
+        this.update_at = update_at;
     }
 
     public Set<Language> getLanguages() {

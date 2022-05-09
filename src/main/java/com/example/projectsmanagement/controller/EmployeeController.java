@@ -1,13 +1,7 @@
 package com.example.projectsmanagement.controller;
 
-import com.example.projectsmanagement.entities.Employee;
-import com.example.projectsmanagement.entities.Language;
-import com.example.projectsmanagement.entities.Role;
-import com.example.projectsmanagement.entities.Status;
-import com.example.projectsmanagement.service.EmployeeService;
-import com.example.projectsmanagement.service.LanguageService;
-import com.example.projectsmanagement.service.RoleService;
-import com.example.projectsmanagement.service.StatusService;
+import com.example.projectsmanagement.entities.*;
+import com.example.projectsmanagement.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -31,6 +25,8 @@ public class EmployeeController {
     private RoleService roleService;
     @Autowired
     private LanguageService languageService;
+    @Autowired
+    private ProjectService projectService;
 
     @RequestMapping("all")
     public String listEmployee(ModelMap model) {
@@ -51,34 +47,6 @@ public class EmployeeController {
         return "employee";
     }
 
-//    @RequestMapping("/all")
-//    public String listEmployee(ModelMap model, String keyword) {
-//        List<Role> roleList = roleService.listAll();
-//        model.addAttribute("roleList", roleList);
-//        List<Language> languageList = languageService.listAll();
-//        model.addAttribute("languageList", languageList);
-//        if (keyword != null) {
-//            List<Employee> employeeList = employeeService.searchByKeyword(keyword);
-//            model.addAttribute("employeeList", employeeList);
-//        } else {
-//            List<Employee> employeeList = employeeService.listAll();
-//            model.addAttribute("employeeList", employeeList);
-//        }
-//        return findPaginated(1, model);
-//    }
-//
-//    @RequestMapping("page")
-//    public String findPaginated(int pageNo, ModelMap model) {
-//        int pageSize = 5;
-//        Page<Employee> employeeList = employeeService.findPaginated(pageNo, pageSize);
-//        List<Role> roleList = roleService.listAll();
-//        List<Language> languageList = languageService.listAll();
-//        model.addAttribute("employeeList", employeeList);
-//        model.addAttribute("roleList", roleList);
-//        model.addAttribute("languageList", languageList);
-//        return "employee";
-//    }
-
     @RequestMapping("/layout")
     public String testEmployee() {
         return "index";
@@ -95,7 +63,7 @@ public class EmployeeController {
 
     @RequestMapping("/save")
     public String saveEmployee(ModelMap model, Employee employee) {
-//        employee.setDate_start_work(LocalDate.now());
+        employee.setUpdate_at(LocalDate.now());
         employeeService.saveOrUpdateEmployee(employee);
         List<Employee> employeeList = employeeService.listAll();
         model.addAttribute("employeeList", employeeList);
@@ -110,6 +78,8 @@ public class EmployeeController {
         model.addAttribute("roleList", roleList);
         List<Language> languageList = languageService.listAll();
         model.addAttribute("languageList", languageList);
+        List<Project> projectListByEmployeeId = projectService.findAllProjectByEmployeeId(id);
+        model.addAttribute("projectListByEmployeeId", projectListByEmployeeId);
         return "update-employee";
     }
 

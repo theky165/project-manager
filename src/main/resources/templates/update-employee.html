@@ -299,13 +299,14 @@
                     <form action="../save" method="post">
                         <input type="hidden" th:field="*{employee.id}">
                         <div class="form-group">
-                            <label for="inputAddress">Name</label>
-                            <input type="text" th:field="*{employee.name}" name="name" class="form-control"
-                                   id="inputAddress">
+                            <label>Name</label>
+                            <input type="text" th:field="*{employee.name}"
+                                   name="name" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="inputAddress">Date start working</label>
-                            <input type="date" th:field="*{employee.date_start_work}" name="date_start_work" class="form-control">
+                            <label>Date start working</label>
+                            <input type="date" th:field="*{employee.date_start_work}" name="date_start_work"
+                                   class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Language</label><br>
@@ -347,6 +348,46 @@
                             <a href="all" class="btn btn-danger">Cancel</a>
                         </div>
                     </form>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <h1 class="h3 mb-2 text-gray-800">Project History</h1>
+            </nav>
+            <div class="container-fluid">
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4 row">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" width="100%" cellspacing="0"><!-- id="dataTable" -->
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Date start</th>
+                                    <th>Date end</th>
+                                    <th>Status</th>
+                                    <!--                                    <th>Start working date</th>-->
+                                    <!--                                    <th></th>-->
+                                    <!--                                    <th></th>-->
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="project : ${projectListByEmployeeId}">
+                                    <td th:text="${project.id}"></td>
+                                    <td th:text="${project.name}"></td>
+                                    <td th:text="${project.start_date}"></td>
+                                    <td th:text="${project.end_date}"></td>
+                                    <td>
+                                        <span style="color: green" th:if="${project.status}">Active</span>
+                                        <span style="color: darkred" th:unless="${project.status}">Deactive</span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- /.container-fluid -->

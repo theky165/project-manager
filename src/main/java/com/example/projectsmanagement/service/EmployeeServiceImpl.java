@@ -1,6 +1,7 @@
 package com.example.projectsmanagement.service;
 
 import com.example.projectsmanagement.entities.Employee;
+import com.example.projectsmanagement.entities.Project;
 import com.example.projectsmanagement.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findAll();
     }
 
+    public List<Employee> findAllSortByUpdateAtDesc() {
+        return employeeRepository.findAllSortByUpdateAtDesc();
+    }
+
     @Override
     public void saveOrUpdateEmployee(Employee employee) {
         employeeRepository.save(employee);
@@ -41,11 +46,6 @@ public class EmployeeServiceImpl implements EmployeeService {
             return projectOptional.get();
     }
 
-//    @Override
-//    public List<Employee> searchByKeyword(String keyword) {
-//        return employeeRepository.searchByKeyword(keyword);
-//    }
-
     @Override
     public Page<Employee> findPaginated(int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
@@ -60,13 +60,4 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         return employeeRepository.findAll(pageable);
     }
-
-//    public Page<Employee> findPaginated(int pageNo, int pageSize, String keyword) {
-//        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
-//        if (keyword != null) {
-//            return employeeRepository.findAllByName(keyword, pageable);
-//        } else {
-//            return employeeRepository.findAll(pageable);
-//        }
-//    }
 }

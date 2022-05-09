@@ -1,6 +1,7 @@
 package com.example.projectsmanagement.repository;
 
 import com.example.projectsmanagement.entities.Employee;
+import com.example.projectsmanagement.entities.Project;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,4 +16,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     //Custom query
     @Query(value = "select e from employee e where e.name like %:keyword%")
     Page<Employee> findAllByName(@Param("keyword") String keyword, Pageable pageable);
+
+    @Query(value = "select * from employee order by update_at desc", nativeQuery = true)
+    List<Employee> findAllSortByUpdateAtDesc();
 }
