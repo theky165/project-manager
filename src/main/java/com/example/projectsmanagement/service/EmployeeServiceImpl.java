@@ -23,6 +23,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findAll();
     }
 
+    @Override
+    public List<Employee> findAllBySameLanguageWithProject(Integer id) {
+        return employeeRepository.findAllBySameLanguageWithProject(id);
+    }
+
+    @Override
+    public List<Employee> findAllEmployeeByLanguage(Integer id) {
+        return employeeRepository.findAllEmployeeByLanguage(id);
+    }
+
     public List<Employee> findAllSortByUpdateAtDesc() {
         return employeeRepository.findAllSortByUpdateAtDesc();
     }

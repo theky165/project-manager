@@ -52,9 +52,14 @@ public class ProjectController {
     }
 
     @RequestMapping("/add")
-    public String addProject(ModelMap model) {
-        List<Employee> employeeList = employeeService.listAll();
-        model.addAttribute("employeeList", employeeList);
+    public String addProject(ModelMap model, Integer languageId) {
+        if (languageId != null){
+            List<Employee> employeeList = employeeService.findAllEmployeeByLanguage(languageId);
+            model.addAttribute("employeeList", employeeList);
+        } else {
+            List<Employee> employeeList = null;
+            model.addAttribute("employeeList", employeeList);
+        }
         List<Language> languageList = languageService.listAll();
         model.addAttribute("languageList", languageList);
         return "add-project";
@@ -73,7 +78,7 @@ public class ProjectController {
     public String updateProject(ModelMap model, @PathVariable(name = "id") Integer id) {
         Project project = projectService.findById(id);
         model.addAttribute("project", project);
-        List<Employee> employeeList = employeeService.listAll();
+        List<Employee> employeeList = employeeService.findAllBySameLanguageWithProject(id);
         model.addAttribute("employeeList", employeeList);
         List<Language> languageList = languageService.listAll();
         model.addAttribute("languageList", languageList);

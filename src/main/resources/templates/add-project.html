@@ -313,11 +313,13 @@
                         <div class="form-group">
                             <label>Language</label><br>
                             <div class="form-check" th:each="language : ${languageList}">
-                                <input class="form-check-input" name="languages" type="checkbox"
-                                       th:value="${language.id}" onchange='handleChange(this);'>
-                                <label class="form-check-label" for="flexCheckDefault" th:text="${language.name}">
+                                <input class="form-check-input" onchange="check()" name="languages" type="checkbox"
+                                       th:value="${language.id}">
+                                <label class="form-check-label" th:text="${language.name}">
                                 </label>
                             </div>
+<!--                            <a id="check" style="cursor: pointer;-->
+<!--                            text-decoration: underline">Show list employee</a>-->
                         </div>
                         <div class="form-group">
                             <label>Employee</label><br>
@@ -346,7 +348,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Add</button>
+                            <button type="submit" class="btn btn-success">Add</button>
                             <a href="all" class="btn btn-danger">Cancel</a>
                         </div>
                     </form>
@@ -413,15 +415,19 @@
 
 <!-- Page level custom scripts -->
 <script src="../js/demo/datatables-demo.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
-    // function handleChange(checkbox) {
-    //     if(checkbox.checked == true){
-    //         // document.getElementById("submit").removeAttribute("disabled");
-    //         alert("Checked!");
-    //     }else{
-    //         // document.getElementById("submit").setAttribute("disabled", "disabled");
-    //     }
-    // }
+    // $(document).ready(function() {
+    //     $("#check").click(function(){
+    function check() {
+        var ele = [];
+        $("input:checkbox[name=languages]:checked").each(function () {
+            ele.push($(this).val());
+            console.log("btn clicked");
+        });
+        // alert("selected "+ele);
+        location.href = "/project/add?languageId=" + ele;
+    };
 </script>
 </body>
 
