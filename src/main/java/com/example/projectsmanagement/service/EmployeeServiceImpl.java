@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,13 +25,27 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> findAllBySameLanguageWithProject(Integer id) {
-        return employeeRepository.findAllBySameLanguageWithProject(id);
+    public List<Employee> findAllEmployeeByProjectLanguage(Integer project_id) {
+        return employeeRepository.findAllEmployeeByProjectLanguage(project_id);
     }
 
     @Override
-    public List<Employee> findAllEmployeeByLanguage(Integer id) {
-        return employeeRepository.findAllEmployeeByLanguage(id);
+    public List<Employee> findAllEmployeeLessThan3Projects() {
+        return employeeRepository.findAllEmployeeLessThan3Projects();
+    }
+
+
+    @Override
+    public List<Employee> findAllEmployeeAvailable(Integer id) {
+        List<Employee> result = new ArrayList<>();
+        for (Employee employeeLanguage : findAllEmployeeByProjectLanguage(id)) {
+            for (Employee employeeLessThan : findAllEmployeeLessThan3Projects()) {
+                if (employeeLanguage.getId() == employeeLessThan.getId()) {
+                    result.add(employeeLanguage);
+                }
+            }
+        }
+        return result;
     }
 
     public List<Employee> findAllSortByUpdateAtDesc() {
@@ -49,11 +64,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee findById(Integer id) {
-            Optional<Employee> projectOptional = employeeRepository.findById(id);
-            if (!projectOptional.isPresent()) {
-                return new Employee();
-            }
-            return projectOptional.get();
+        Optional<Employee> projectOptional = employeeRepository.findById(id);
+        if (!projectOptional.isPresent()) {
+            return new Employee();
+        }
+        return projectOptional.get();
     }
 
     @Override

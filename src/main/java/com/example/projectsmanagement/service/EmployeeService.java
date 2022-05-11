@@ -11,8 +11,9 @@ import java.util.List;
 public interface EmployeeService {
     List<Employee> listAll();
 
-    List<Employee> findAllBySameLanguageWithProject(Integer id);
-    List<Employee> findAllEmployeeByLanguage(Integer id);
+    List<Employee> findAllEmployeeByProjectLanguage(Integer project_id);
+    List<Employee> findAllEmployeeLessThan3Projects();
+    List<Employee> findAllEmployeeAvailable(Integer project_id);
 
     void saveOrUpdateEmployee(Employee employee);
 
